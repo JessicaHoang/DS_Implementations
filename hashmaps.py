@@ -1,5 +1,6 @@
 '''
 Practicing implementing hashmaps
+reference: codebasics on Youtube: https://www.youtube.com/watch?v=54iv1si4YCM
 '''
 # def get_hash(key):
 #     h = 0
@@ -12,8 +13,8 @@ Practicing implementing hashmaps
 
 class HashTable:
     def __init__(self):
-        self.MAX = 100
-        self.arr = [None for i in range(self.MAX)]
+        self.MAX = 10
+        self.arr = [[] for i in range(self.MAX)] # initialized empty array [] instead of None
 
     # Hash function
     def get_hash(self, key):
@@ -25,7 +26,18 @@ class HashTable:
     # add/insert function
     def __setitem__(self, key, val):
         h = self.get_hash(key)
-        self.arr[h] =val
+        # self.arr[h] =val # overides index h, so it can't handle collisions yet
+        found = False
+        # istead create a linked list for when you need collision handling
+        for idx, element in enumerate(self.arr[h]):
+            # handling the case where the key exists already
+            if len(element) == 2 and element[0] == key:
+                self.arr[h][idx] = (key,val)
+                found=True
+                break
+        # handles the case where the key has not yet existed
+        if not found:
+            self.arr[h].append((key, val))
     
     # get function. Calling it by key
     def __getitem__(self, key):
@@ -44,16 +56,25 @@ t = HashTable()
 # print(t.__setitem__('march 6', 130)) 
 # print(t.__getitem__('march 6'))
 
+print(t.get_hash('march 6'))
+print(t.get_hash('march 17'))
+
+# print('use dictionary: ')
+
 # using dictionary
-t['march 6'] = 130 # setitem
-t['march 1'] = 20
-t['dec 17'] = 27
+t['march 6'] = 120 # setitem
+t['march 6'] = 78 # updates 'march 6' value
+t['march 8'] = 67
+t['march 9'] = 4
+t['march 17'] = 459
 
-print(t['march 6']) # getitem
-print(t['march 1'])
-print(t['dec 17'])
+# print(t['march 6']) # getitem
+# print(t['march 8'])
+# print(t['march 9'])
+# print(t['march 17'])
 
-del t['march 6'] # should delete 130 from the dictionary
+# del t['march 6'] # should delete 130 from the dictionary
 
-print(t.arr) # printing dictionary
+# print(t.arr) # printing dictionary
+print(t['march 6'])
 
