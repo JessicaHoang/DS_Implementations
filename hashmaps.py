@@ -42,12 +42,18 @@ class HashTable:
     # get function. Calling it by key
     def __getitem__(self, key):
         h = self.get_hash(key)
-        return self.arr[h]
+        # return self.arr[h] # retrieves everything in the particular index
+        for element in self.arr[h]:
+            if element[0] == key:
+                return element[1]
+
     
     #delete item function
     def __delitem__(self, key):
         h = self.get_hash(key)
-        self.arr[h] = None
+        for idx, element in enumerate(self.arr[h]):
+            if element[0] == key:
+                del self.arr[h][idx]
 
            
 
@@ -73,8 +79,8 @@ t['march 17'] = 459
 # print(t['march 9'])
 # print(t['march 17'])
 
-# del t['march 6'] # should delete 130 from the dictionary
+del t['march 6'] # should delete 130 from the dictionary
 
-# print(t.arr) # printing dictionary
-print(t['march 6'])
+print(t.arr) # printing dictionary
+# print(t['march 17'])
 
