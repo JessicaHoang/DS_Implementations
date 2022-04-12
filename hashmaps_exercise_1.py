@@ -2,45 +2,7 @@
 HashTable Exercise 1
 '''
 import csv
-
-class HashTable:
-    def __init__(self):
-        self.MAX = 100
-        self.arr = [[] for i in range(self.MAX)]
-    
-    def get_hash(self, key):
-        h = 0
-        for char in key:
-            h += ord(char)
-        return h % self.MAX
-    
-    def __setitem__(self, key, val):
-        h = self.get_hash(key)
-        # self.arr[h] =val # overides index h, so it can't handle collisions yet
-        found = False
-        # istead create a linked list for when you need collision handling
-        for idx, element in enumerate(self.arr[h]):
-            # handling the case where the key exists already
-            if len(element) == 2 and element[0] == key:
-                self.arr[h][idx] = (key,val)
-                found=True
-                break
-        # handles the case where the key has not yet existed
-        if not found:
-            self.arr[h].append((key, val))
-    
-    def __getitem__(self, key):
-        h = self.get_hash(key)
-        # return self.arr[h] # retrieves everything in the particular index
-        for element in self.arr[h]:
-            if element[0] == key:
-                return element[1]
-    
-    def __delitem__(self, key):
-        h = self.get_hash(key)
-        for idx, element in enumerate(self.arr[h]):
-            if element[0] == key:
-                del self.arr[h][idx]
+from hashmaps import *
 
 t = HashTable()
 # reading csv file

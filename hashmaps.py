@@ -57,30 +57,30 @@ class HashTable:
 
            
 
-t = HashTable()
-# using function
-# print(t.__setitem__('march 6', 130)) 
-# print(t.__getitem__('march 6'))
+# t = HashTable()
+# # using function
+# # print(t.__setitem__('march 6', 130)) 
+# # print(t.__getitem__('march 6'))
 
-print(t.get_hash('march 6'))
-print(t.get_hash('march 17'))
+# print(t.get_hash('march 6'))
+# print(t.get_hash('march 17'))
 
-# print('use dictionary: ')
+# # print('use dictionary: ')
 
-# using dictionary
-t['march 6'] = 120 # setitem
-t['march 6'] = 78 # updates 'march 6' value
-t['march 8'] = 67
-t['march 9'] = 4
-t['march 17'] = 459
+# # using dictionary
+# t['march 6'] = 120 # setitem
+# t['march 6'] = 78 # updates 'march 6' value
+# t['march 8'] = 67
+# t['march 9'] = 4
+# t['march 17'] = 459
 
-# print(t['march 6']) # getitem
-# print(t['march 8'])
-# print(t['march 9'])
-# print(t['march 17'])
+# # print(t['march 6']) # getitem
+# # print(t['march 8'])
+# # print(t['march 9'])
+# # print(t['march 17'])
 
-del t['march 6'] # should delete 130 from the dictionary
+# del t['march 6'] # should delete 130 from the dictionary
 
-print(t.arr) # printing dictionary
-# print(t['march 17'])
+# print(t.arr) # printing dictionary
+# # print(t['march 17'])
 
