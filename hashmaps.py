@@ -23,6 +23,10 @@ class HashTable:
             h += ord(char)
         return h % self.MAX
     
+    # hash function for numbers
+    def get_num_hash(self, key):
+        return key % self.MAX
+    
     # add/insert function
     def __setitem__(self, key, val):
         h = self.get_hash(key)
