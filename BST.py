@@ -214,6 +214,9 @@ append: create a new node and give it the correct reference.
 #         # check if tree is not empty
 #         else:
 
+from hashlib import new
+
+
 class Node(object):
     def __init__(self, data = None):
         self.data = data
@@ -224,37 +227,91 @@ class BinaryTree(object):
     def __init__(self, node = None):
         self.node = node
     
+    def inOrderTraversal(self):
+        # newNode = Node(newNodeData)
+        elements = []
+        # visit left tree
+        if self.node.left:
+            elements += self.inOrderTraversal()
+        # visit base node
+        elements.append(self.node.data)
+        # visit right tree
+        if self.node.right:
+            elements += self.inOrderTraversal()
+        return elements
+    
     def printBinaryTree(self):
+        # # root is the first node
+        # root = BinaryTree(elements[0])
+        # root.insert(elements[0])
+        # # iterate through element list and insert node into it
+        # for i in range(1, len(elements)):
+        #     root.insertNonRoot(elements[i])
+        #     # print(root.insertNonRoot(elements[i]))
+        
+        # return root
+        
         if self.node is None:
             print("Binary tree is empty")
             return
         BTstr = ''
-        itr = self.node
-        while itr:
-            BTstr += str(itr.data) + "->" 
-            itr = itr.left
+        while self.node.data in self.inOrderTraversal():
+            BTstr += str(self.node.data)
         print(BTstr)
+
+        # if self.node is None:
+        #     print("Binary tree is empty")
+        #     return
+        # BTstr = ''
+        # itr = self.node
+        # while itr:
+        #     BTstr += str(itr.data) + "-->"
+        #     itr = itr.left
+        # print(BTstr)
 
     # insert from head of list
     def insert(self, item):
-       node = Node(item, self.node)
-       self.node = node
+        node = Node(item)
+        self.node = node
 
-        # binary tree is not empty
-        # iterate to the leaf node, then determine whether it's a right or left node
-        # parent = self.node.data
-        # if item < parent:
-        #     print("less than parent, go to left")
-        # elif item > parent:
-        #     print("greater than parent")
-        # else:
-        #     print("node is duplicate and cannot be added.")
-        
+    def insertNonRoot(self, newNodeData):
+        newNode = Node(newNodeData)
+        # do not inser duplicates
+        if newNode.data == self.node.data:
+            return
+        # insert in left
+        if newNode.data < self.node.data:
+            if self.node.left:
+                print("node is less than parent node")
+                self.insertNonRoot(newNode.data)
+                # newNode.left = None
+                # newNode.right = None
+            else:
+                self.node.data = newNode.data
+                newNode.left = None
+                newNode.right = None
+        # insert in right
+        else:
+            if self.node.right:
+                print("node is more than parent node")
+                self.insertNonRoot(newNode.data)
+                # newNode.left = None
+                # newNode.right = None
+            else:
+                self.node.data = newNode.data
+                newNode.left = None
+                newNode.right = None
 
 if __name__ == '__main__':
     BT = BinaryTree()
-    BT.insert(5)
-    BT.insert(4)
+    # BT.insert(60)
+    # BT.insertNonRoot(62)
+    # BT.insertNonRoot(34)
+    # BT.insertNonRoot(58)
+    # BT.insertNonRoot(87)
+    element_list = [60,62, 34, 58, 87]
+    elements_tree = BT.printBinaryTree()
+    print(BT.inOrderTraversal())
     BT.printBinaryTree()
             
         
