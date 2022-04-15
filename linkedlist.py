@@ -21,9 +21,9 @@ class SLinkedList(object):
     
     # insert in the beginning
     def insert(self, newNode):
-       node = Node(newNode, self.head)
-       self.head = node
-    
+        node = Node(newNode, self.head)
+        self.head = node
+
     def insert_at_index(self, idx, newNode):
         # base case: check if idx is invalid
         if idx < 0 or idx > self.lengthOfLL():

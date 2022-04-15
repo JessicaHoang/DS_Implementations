@@ -215,29 +215,14 @@ append: create a new node and give it the correct reference.
 #         else:
 
 class Node(object):
-    def __init__(self, data = None, left = None, right = None):
+    def __init__(self, data = None):
         self.data = data
-        self.left = left
-        self.right = right
+        self.left = None
+        self.right = None
     
 class BinaryTree(object):
-    def __init__(self):
-        self.node = None
-
-    # # left, root, right
-    # def inOrderTraversal(self):
-    #     # base case
-    #     if self.node == None:
-    #         print("binary tree is empty. Nothing to traverse.")
-    #         return
-    #     BT_arr = []
-    #     itr = self.node
-    #     # iterate through left
-    #     while itr:
-    #         BT_arr.append(itr)
-    #         itr = itr.left
-    #         break
-        
+    def __init__(self, node = None):
+        self.node = node
     
     def printBinaryTree(self):
         if self.node is None:
@@ -252,9 +237,8 @@ class BinaryTree(object):
 
     # insert from head of list
     def insert(self, item):
-        if self.node is None:
-            currentNode = Node(item)
-            self.node(currentNode)
+       node = Node(item, self.node)
+       self.node = node
 
         # binary tree is not empty
         # iterate to the leaf node, then determine whether it's a right or left node
@@ -270,6 +254,7 @@ class BinaryTree(object):
 if __name__ == '__main__':
     BT = BinaryTree()
     BT.insert(5)
+    BT.insert(4)
     BT.printBinaryTree()
             
         
